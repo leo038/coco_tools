@@ -15,7 +15,7 @@ def yolo_result_to_coco(init_json_path, save_json_name="./convert_result.json"):
     output_dts = []
     for dt in dts:
         # dt['image_id'] = filename2id[dt['image_id'] + '.jpg']
-        category_id_coco = CLASS_MAP[int(dt['category_id'] - 1)]  ##yolo评估结果中保存的json文件， 其id是从1到80, 而coco中是1道90
+        category_id_coco = CLASS_MAP[int(dt['category_id'] - 1)]  ##yolo评估结果中保存的json文件， 其id是从1到80, 而coco中是1到90
         dt.update({"category_id": category_id_coco})
         output_dts.append(dt)
     with open(save_json_name, 'w') as f:
@@ -42,7 +42,7 @@ if __name__ == '__main__':
     parser.add_argument("--gt", type=str, help="Assign the groud true path.",
                         default='/data/joyiot/leo/datasets/coco/annotations/instances_val2017.json')
     parser.add_argument("--dt", type=str, help="Assign the detection result path.",
-                        default='/data/joyiot/leo/codes/spatial-perception/runs/detect/val17/predictions.json')
+                        default='runs/detect/val5/predictions.json')
     parser.add_argument("--id_type", default="coco80", help="id_type is coco80 or coco91")
 
     args = parser.parse_args()
